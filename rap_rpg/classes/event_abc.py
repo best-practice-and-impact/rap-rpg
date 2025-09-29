@@ -53,7 +53,7 @@ class Event(ABC):
         if self.game_state_modifier is not None:
             print("")
             for k, v in self.game_state_modifier.items():
-                print(f"{v} to {k.replace("_", " ").lower()}")
+                print(f"{"+" if v > 0 else ""}{v} to {k.replace("_", " ").lower()}")
         return None
     
     @abstractmethod

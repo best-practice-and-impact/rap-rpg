@@ -1,4 +1,4 @@
-from rap_rpg.events.new_ai_agent import NewAIAgent
+from rap_rpg.events.new_ai_event import NewAIAgent
 from rap_rpg.events.review_event import Review
 from rap_rpg.classes.game import Game
 
@@ -6,7 +6,7 @@ import logging
 import traceback
 
 if __name__ == "__main__":
-    events_list = [Review, NewAIAgent]
+    events_list = [NewAIAgent, Review]
 
     try:
         rap_game = Game(events_list)
