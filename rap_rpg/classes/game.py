@@ -12,9 +12,9 @@ class Game:
             stage = event()
             if stage.game_state_modifier:
                 for k, v in stage.game_state_modifier.items():
-                    if k in ("process_quality", "late_risk", "team_motivation"):
+                    if isinstance(v, str):
                         self.game_state[k] += stage.game_state_modifier.get(k, 0)
-                    else:
+                    else: # Boolean for example
                         self.game_state[k] = v
             input(display_utils.continue_message)
         print(self.game_state)
@@ -30,7 +30,7 @@ Choices that help them work together effectively will boost their process and co
 But, choices that make it harder to collaborate will make it more likely there will be a delay or an error.\n
 Play along with a dice, or virtual dice roller.
 
-To quit at any time, use CTRL and C. {display_utils.continue_message}"""
+To quit at any time, use CTRL and C. Press any key to continue."""
 
 outro_msg = f"""{display_utils.delim}\nThank you for playing the demo of RAP-RPG!"
 

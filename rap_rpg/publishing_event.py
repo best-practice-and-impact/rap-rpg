@@ -1,4 +1,3 @@
-from classes.dice_check import DiceCheck
 
 def publishing_day(game_state = None, success_threshold = 4):
     publication = DiceCheck("Publiation success or not", "It's publishing day! ",
