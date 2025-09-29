@@ -1,5 +1,5 @@
 from rap_rpg.classes.event_abc import Event
-from rap_rpg.classes.dice_check import DiceCheck
+from rap_rpg.utils.dice_roll import roll_the_dice
 
 eat_apple = DiceCheck("Take apple", "You take the apple. It's red and shiny. ",
                       "Roll to see if it's nice! ", 3,
