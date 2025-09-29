@@ -2,16 +2,15 @@ from abc import ABC, abstractmethod
 from rap_rpg.utils.display_utils import print_options
 
 class Event(ABC):
-    def __init__(self, event_text, options:list, game_state_modifier = None):
-        self.event_text = event_text # What the event is
-        self.options = options # Options for the user to choose from
+    def __init__(self, event_text, options, game_state = None):
+        self.event_text = event_text
+        self.options = options # ["option 1", "option 2"...] or None
+        self.game_state = game_state # If the event needs to know about the game state
         self.choice = None # This is -1 what the user sees (e.g user option 1 gives self.choice 0)
-        self.game_state_modifier = game_state_modifier # Effects on the game
+        self.game_state_modifier = None # Updated from effect of event on the game. Mainly: "process_quality", "team_motivation", "late_risk"
         self.dice_res = None
     
         print(self.event_text)
-        self._prompt_choice()
-        self._handle_choice()
 
     def _prompt_choice(self):
         print_options(self.options)
@@ -35,6 +34,7 @@ class Event(ABC):
     
     def _roll_the_dice(self):
         valid_choices = [int(i) for i in range(1, 7)]
+        print("\n", end = "")
         while True:
             try:
                 dice_res = int(input("What did you roll? "))
