@@ -7,17 +7,20 @@ class Review(Event):
         self.options = ["He merges into main right away. It's busy, afterall!",
                         "He requests a code review - Lena said she'd be happy to take a look."]
         super().__init__(self.event_text, self.options)
+        
+        self._prompt_choice()
+        self._handle_choice()
     
     def _handle_choice(self):
         if self.choice == 0:
-            print("There's no code review, and it turns out there was a bug in Brian's code. Oops...\n")
+            print("There's no code review, and it turns out there was a bug in Brian's code. Oops...")
             self.game_state_modifier = {"process_quality": -1}
 
         elif self.choice == 1:
-            print("Lena takes a look at Brian's code. Let's roll to see how it went!\n")
+            print("Lena takes a look at Brian's code. Let's roll to see how it went!")
             self._roll_the_dice()
 
-            if (self.dice_res <= 2):
+            if self.dice_res <= 2:
                 print_long_message("""\
                     Lena didn't feel psychologically safe enough to raise an issue with Brian's code.
                     It was a bit hard to understand, and maybe one or two extra tests would have been good...

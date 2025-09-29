@@ -6,14 +6,17 @@ class NewAIAgent(Event):
         self.event_text = """Coming up to the team's deadline, their workplace introduces a new AI agent.
 Do they use the AI to help implement a new feature in the pipeline?"""
         self.options = ["Yes", "No"]
+        
         super().__init__(self.event_text, self.options)
+        self._prompt_choice()
+        self._handle_choice()
 
     def _handle_choice(self):
         if self.choice == 0:
-            print("They choose to use the AI agent. Roll to see how it goes!\n")
+            print("They choose to use the AI agent. Roll to see how it goes!")
             self._roll_the_dice()
 
-            if (self.dice_res <= 2):
+            if self.dice_res <= 2:
                 print_long_message("""\
                                    The AI comes up with some code which seems fine, so they merge it into main.
                                    It breaks another part of the pipeline. They spend longer debugging than it would
@@ -27,7 +30,7 @@ Do they use the AI to help implement a new feature in the pipeline?"""
                 self.game_state_modifier = {"process_quality": 1, "team_motivation": 1}
 
         elif self.choice == 1:
-            print("They're not fussed about AI, and stick to doing it themselves. What happens next? Roll the dice!\n")
+            print("They're not fussed about AI, and stick to doing it themselves. What happens next? Roll the dice!")
             self._roll_the_dice()
 
             if self.dice_res <= 4:
