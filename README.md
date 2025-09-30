@@ -12,7 +12,7 @@ Clone the repo with `git clone https://github.com/best-practice-and-impact/rap-r
 
 On a terminal or command line interface, head to the repo folder, and simply use Python to play! `python play_rap_rpg.py`. 
 
-Or, load up `play_rap_rpg.py` in your code editor of choice, and play in the terminal there!
+Or, load up `play_game.py` in your code editor of choice, and play in the terminal there!
 
 Enjoy! 🥳
 
