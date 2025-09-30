@@ -1,6 +1,5 @@
 from rap_rpg.classes.event_abc import Event
 from rap_rpg.utils.display_utils import print_long_message
-from functools import partial
 
 class Agile(Event):
     def __init__(self):
