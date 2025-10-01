@@ -1,6 +1,6 @@
 import textwrap
 delim = "----------------------------------------"
-continue_message = "\nPress any key to continue. "
+continue_message = "\nPress enter to continue. "
 
 def print_options(options):
     i = 1

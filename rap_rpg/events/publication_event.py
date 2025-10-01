@@ -96,14 +96,14 @@ class Publication(Event):
                                        """)
             elif self.dice_res <= 4:
                 print_long_message("""\
-                                   The team publish on time and to the standard expected by their stakeholders. It's a win! The
+                                   The team publish to the standard expected by their stakeholders. It's a win! The
                                    team are really happy to be done.
                                    """)
             else:
                 print_long_message("""\
-                                   The team publish on time without any issues. They do a range of show-and-tells interally,
-                                   showing the continuous improvements they've been able to do. It was a real team effort, and
-                                   a great win.
+                                   The team publish to the standard expected by their stakeholders. They do a range of
+                                   show-and-tells interally, showing the continuous improvements they've been able to do.
+                                   It was a real team effort, and a great win.
                                    """)
         
         if team_motivation <= -2:
