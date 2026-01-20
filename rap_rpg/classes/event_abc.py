@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
-from rap_rpg.utils.display_utils import print_options
+from rap_rpg.utils.display_utils import style
+from questionary import select
 
 class Event(ABC):
     def __init__(self, event_text, options, game_state = None):
@@ -13,24 +14,17 @@ class Event(ABC):
         print(self.event_text)
 
     def _prompt_choice(self):
-        print_options(self.options)
-        self.choice = self._take_and_validate_choice_input() - 1
+        self.choice = self._take_and_validate_choice_input()
         return None
     
     def _take_and_validate_choice_input(self):
-        valid_choices = [int(i) for i in range(1, len(self.options) + 1)]
-        while True:
-            try:
-                choice = int(input("\nWhat do you choose? "))
-                if choice in valid_choices:
-                    return choice
-                else:
-                    print(f"That wasn't a valid choice. Pick an integer from 1 to {len(valid_choices)}.")
-            except ValueError:
-                print(f"That wasn't a valid choice. Pick an integer from 1 to {len(valid_choices)}.")
-            except KeyboardInterrupt:
-                print("\nThanks for playing!")
-                exit()
+        try:
+            choice = select("What do you choose?", choices=self.options, qmark="🔍 ", style=style).ask()
+            choice_index = self.options.index(choice)
+            return choice_index
+        except (KeyboardInterrupt, ValueError):
+            print("\nThanks for playing!")
+            exit()
     
     def _roll_the_dice(self):
         valid_choices = [int(i) for i in range(1, 7)]
