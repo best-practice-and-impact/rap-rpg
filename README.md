@@ -10,6 +10,8 @@ Grab a 6 sided dice, or use a [virtual dice roller](https://share.google/0h7RJgk
 
 Clone the repo with `git clone https://github.com/best-practice-and-impact/rap-rpg.git`
 
+Install the Python dependencies using `pip install -r requirements.txt`
+
 On a terminal or command line interface, head to the repo folder, and simply use Python to play! `python play_game.py`. 
 
 Or, load up `play_game.py` in your code editor of choice, and play in the terminal there!
