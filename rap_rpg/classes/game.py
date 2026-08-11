@@ -1,11 +1,94 @@
-from rap_rpg.utils import display_utils
-from rap_rpg.events.publication_event import Publication
+from utils.display_utils import print_long_message
+from events.publication_event import Publication
+import events
+import json
+import os
+from questionary import select, Style
+
+style = Style([
+        ("pointer", "fg:#F46A25 bold"),
+        ("selected", "noinherit fg:#F46A25 bold"),
+        ("highlighted", "fg:#F46A25 bold"),
+        ("answer", "fg:#F46A25 bold")
+    ])
 
 class Game:
-    def __init__(self, events_list):
-        self.events = events_list
+    def __init__(self, events_folder, intro_msg, close_msg):
+        events_configs = []
+        for filename in os.listdir(events_folder):
+            if filename.endswith(".json"):
+                with open(os.path.join(events_folder, filename), "r") as f:
+                    event_data = json.load(f)
+                    events_configs.append(events.Event(**event_data))
+
+        self.events = [events.Event(**event_config) for event_config in events_configs]
+        self.intro_msg = intro_msg 
+        self.close_msg = close_msg
+
+    def _take_and_validate_choice_input(self, options):
+        try:
+            choice = select("What do you choose?", choices=options.text, qmark="🔍 ", style=self.style).ask()
+            choice_index = self.options.index(choice)
+            return choice_index
+        except (KeyboardInterrupt, ValueError):
+            print("\nThanks for playing!")
+            exit()
+
+    def start_game(self):
+        self.event_id = 0        
         self.game_state = {"process_quality": 0, "late_risk": 0, "team_motivation": 0}
+       
+        print_long_message(self.intro_msg)
+        input("\nPress enter to start...")
+        self.run_event()
+
+
+
+    def run_event(self):
+        event = self.events[self.event_id]
+        print_long_message(event.text)
+        input("\n....Press enter to continue...")
+        choices = [event.get_choice_text(i) for i in range(len(event.choices))]
+        choice_index = self._take_and_validate_choice_input(choices)
+        die_roll = int(input("Roll the die (1-6): "))
+        outcome_text, modifiers = event.set_choice(choice_index, die_roll)
+        '''
+        TODO:
+        - update game stats with modifiers
+        - run next event if available
+        - if no more events, run end_game()
+        '''
+
+
+
+
+
+
+    def end_game():
+
+        """ 
+        Created class to read in events and set up intro and reset game state
+        todo:
+        - reset index at begining of new game
+        - end game and display final screens
+        - loop to run through events in events_config 
+        - end loop when counter is empty
+        - 
+        """ 
     
+
+
+
+
+
+
+
+class Game:
+    def __init__(self, events_list, intro_msg):
+        self.events = events_list
+        self.intro_msg = intro_msg
+        self.game_state = {"process_quality": 0, "late_risk": 0, "team_motivation": 0}
+
     def run(self):
         print(intro_msg, end="")
         input(display_utils.continue_message)
