@@ -1,4 +1,4 @@
-from utils.display_utils import print_long_message
+from utils.display_utils import print_long_message, delim
 from events.publication_event import Publication
 import events
 import json
@@ -48,68 +48,36 @@ class Game:
         event = self.events[self.event_id]
         print_long_message(event.text)
         input("\n....Press enter to continue...")
+
         choices = [event.get_choice_text(i) for i in range(len(event.choices))]
         choice_index = self._take_and_validate_choice_input(choices)
         die_roll = int(input("Roll the die (1-6): "))
         outcome_text, modifiers = event.set_choice(choice_index, die_roll)
-        '''
-        TODO:
-        - update game stats with modifiers
-        - run next event if available
-        - if no more events, run end_game()
-        '''
+        print_long_message(outcome_text)
+        input("\n....Press enter to continue...")
+
+        self.game_state = {key: self.game_state[key] + modifiers[key] for key in self.game_state.keys()}
+        self.event_id += 1
+
+        if self.event_id < len(self.events) - 1:
+            self.run_event()
+        else:
+            self.end_game()
 
 
 
-
-
-
-    def end_game():
-
-        """ 
-        Created class to read in events and set up intro and reset game state
-        todo:
-        - reset index at begining of new game
-        - end game and display final screens
-        - loop to run through events in events_config 
-        - end loop when counter is empty
-        - 
-        """ 
-    
-
-
-
-
-
-
-
-class Game:
-    def __init__(self, events_list, intro_msg):
-        self.events = events_list
-        self.intro_msg = intro_msg
-        self.game_state = {"process_quality": 0, "late_risk": 0, "team_motivation": 0}
-
-    def run(self):
-        print(intro_msg, end="")
-        input(display_utils.continue_message)
-        for event in self.events:
-            print(display_utils.delim)
-            stage = event()
-            if stage.game_state_modifier:
-                for k, v in stage.game_state_modifier.items():
-                    if isinstance(v, bool):
-                        self.game_state[k] = v
-                    elif isinstance(v, int):
-                        self.game_state[k] += stage.game_state_modifier.get(k, 0)
-            input(display_utils.continue_message)
-        # print(self.game_state)
-        print(display_utils.delim)
+    def end_game(self):
+        print_long_message(self.close_msg)
+        input("\nPress enter to continue...")
         Publication(self.game_state)
-        input(display_utils.continue_message)
-        print(outro_msg)
-        return None
+        restart = input("\nDo you want to restart (Y/N)? ")
+        if restart.upper() == "Y":
+            self.start_game()
+        else:
+            print("Thanks for playing!")
 
-intro_msg = f"""{display_utils.delim}
+
+intro_msg = f"""{delim}
 This is a role-playing game about a statistics production team.
 Throughout this story the team will be faced with choices about their code and how they work together. 
 We’re going to find out if they can successfully produce their statistic on time and without errors!
@@ -120,7 +88,7 @@ make it less likely that there will be a delay or an error.
 Play along with a dice or virtual dice roller. To quit at any time, use CTRL and C. 
 """
 
-outro_msg = f"""{display_utils.delim}\nThank you for playing the demo of RAP-RPG!
+outro_msg = f"""{delim}\nThank you for playing the demo of RAP-RPG!
 
 If you're interested in continuous improvement, take a look at some of these resources:
 

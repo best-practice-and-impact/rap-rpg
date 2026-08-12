@@ -1,5 +1,5 @@
-from rap_rpg.classes.event_abc import Event
-from rap_rpg.utils.display_utils import print_long_message
+from classes.event_abc import Event
+from utils.display_utils import print_long_message
 from random import randint
 
 class Publication(Event):
