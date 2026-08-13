@@ -4,9 +4,9 @@ from typing import Optional
 
 @dataclass(init=False)
 class Event:
-    """Represents a game event."""
+    """Game event data class"""
 
-    def __init__(self, id: str, text: str, choices: list, game_state_attributes = []):
+    def __init__(self, id: str, text: str, choices: list[dict], game_state_attributes: list[str] = []) -> None:
         """
         Initialise the event.
 
@@ -22,7 +22,26 @@ class Event:
         self.choices = [Choice(**c) for c in choices]
         shuffle(self.choices)
 
-    def validate(self, id, text, choices, game_state_attributes: list = []):
+    def validate(self, id: str, text: str, choices: list[dict], game_state_attributes: list[str] = []) -> None:
+        """
+        Validate the arguments passed to the Event constructor.
+
+        Args:
+            id (str): Unique identifier for the event.
+            text (str): Narrative text for the event.
+            choices (list): List of choice dicts. Each must contain the required keys:
+                text, roll_boundaries, bad_outcome_text, bad_outcome_modifiers,
+                good_outcome_text, good_outcome_modifiers. Optional keys:
+                mid_outcome_text, mid_outcome_modifiers.
+            game_state_attributes (list): Allowed game state keys. If provided, all modifier
+                keys in choices must be a subset of this list.
+
+        Raises:
+            TypeError: If any argument is the wrong type.
+            ValueError: If required keys are missing, unexpected keys are present, or modifier
+                keys are not a subset of game_state_attributes.
+        """
+
         if not isinstance(id, str):
             raise TypeError(f"Invalid ID: expected str, got {type(id).__name__}")
         if not isinstance(text, str):
@@ -63,7 +82,7 @@ class Event:
             if not set(all_keys).issubset(set(game_state_attributes)):
                 raise ValueError(f"Invalid game state attributes: valid keys = {game_state_attributes}")
     
-    def get_choice_text(self, choice_index: int):
+    def get_choice_text(self, choice_index: int) -> str:
         """
         Return the display text for the choice at the given index.
 
@@ -75,7 +94,7 @@ class Event:
         """
         return self.choices[choice_index].text
 
-    def set_choice(self, choice_index: int, roll: int):
+    def set_choice(self, choice_index: int, roll: int) -> tuple[str, dict]:
         """
         Resolve a player's choice and dice roll, returning the outcome text and modifiers.
 
@@ -118,7 +137,7 @@ class Choice:
     mid_outcome_text: Optional[str] = None
     mid_outcome_modifiers: Optional[dict] = None
 
-    def get_roll(self, roll: int):
+    def get_roll(self, roll: int) -> tuple[str, dict]:
         """
         Return the outcome text and game modifiers based on the dice roll.
 

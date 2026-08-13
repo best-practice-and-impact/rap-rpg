@@ -12,7 +12,17 @@ style = Style([
     ])
 
 class Game:
-    def __init__(self, events_folder, intro_msg, close_msg):
+    """Main game class."""
+
+    def __init__(self, events_folder: str, intro_msg: str, close_msg: str) -> None:
+        """
+        Initialise the game.
+
+        Args:
+            events_folder (str): Path to the folder containing event JSON config files.
+            intro_msg (str): Message displayed at the start of the game.
+            close_msg (str): Message displayed at the end of the game.
+        """
         events_configs = []
         events_configs = []
         for filename in os.listdir(events_folder):
@@ -26,7 +36,16 @@ class Game:
         self.intro_msg = intro_msg 
         self.close_msg = close_msg
 
-    def _take_and_validate_choice_input(self, event):
+    def _take_and_validate_choice_input(self, event: Event) -> int:
+        """
+        Present the player with a choice prompt and return the selection index.
+
+        Args:
+            event (Event): The current event whose choices are presented.
+
+        Returns:
+            int: Index of the selected choice.
+        """
         try:
             choices = [event.get_choice_text(i) for i in range(len(event.choices))]
             choice = select("What do you choose?", choices=choices, qmark="🔍 ", style=style).ask()
@@ -36,7 +55,8 @@ class Game:
             print("\nThanks for playing!")
             exit()
 
-    def start_game(self):
+    def start_game(self) -> None:
+        """Reset game state."""
         self.event_id = 0        
         self.game_state = {"process_quality": 0, "late_risk": 0, "team_motivation": 0}
        
@@ -44,7 +64,10 @@ class Game:
         input("\nPress enter to start...")
         self.run_event()
 
-    def run_event(self):
+    def run_event(self) -> None:
+        """
+        Run the current event.
+        """
         event = self.events[self.event_id]
         print_long_message(event.text)
         input("\n....Press enter to continue...")
@@ -63,7 +86,8 @@ class Game:
         else:
             self.end_game()
 
-    def end_game(self):
+    def end_game(self) -> None:
+        """Display the closing message and prompt the player to restart or quit."""
         print_long_message(self.close_msg)
         input("\nPress enter to continue...")
         restart = select("Do you want to restart?", choices=["Yes", "No"], qmark="🔄", style=style).ask()
