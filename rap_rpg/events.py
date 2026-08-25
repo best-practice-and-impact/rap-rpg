@@ -100,7 +100,7 @@ class Event:
 
         Args:
             choice_index (int): choice number beginning at 0.
-            roll (int): The dice roll.
+            roll (int): number between 1 and 6.
 
         Returns:
             tuple[str, dict]: The outcome text and dict of stat modifiers.
@@ -114,7 +114,7 @@ class Event:
 
 @dataclass
 class Choice:
-    """Represents a single player choice within an event
+    """Data class representing a single player choice within an event
     
     Attributes:
         text (str): choice text.

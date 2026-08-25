@@ -36,7 +36,7 @@ class Game:
         self.intro_msg = intro_msg 
         self.close_msg = close_msg
 
-    def _take_and_validate_choice_input(self, event: Event) -> int:
+    def _take_choice_input(self, event: Event) -> int:
         """
         Present the player with a choice prompt and return the selection index.
 
@@ -72,7 +72,7 @@ class Game:
         print_long_message(event.text)
         input("\n....Press enter to continue...")
 
-        choice_index = self._take_and_validate_choice_input(event)
+        choice_index = self._take_choice_input(event)
         die_roll = int(select("Roll the die:", choices=["1", "2", "3", "4", "5", "6"], qmark="🎲", style=style).ask())
         outcome_text, modifiers = event.set_choice(choice_index, die_roll)
         print_long_message(outcome_text)
