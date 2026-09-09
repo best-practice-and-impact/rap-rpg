@@ -24,7 +24,6 @@ class Game:
             close_msg (str): Message displayed at the end of the game.
         """
         events_configs = []
-        events_configs = []
         for filename in os.listdir(events_folder):
             if filename.endswith(".json"):
                 with open(os.path.join(events_folder, filename), "r") as f:
