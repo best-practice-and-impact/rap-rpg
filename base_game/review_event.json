@@ -1,0 +1,28 @@
+{
+    "id": "review",
+    "text": "After adding a new feature to the team code, what does Brian do?",
+    "choices": [
+        {
+            "text": "He merges into main right away. It's busy, afterall!",
+            "roll_boundaries": [0],
+            "bad_outcome_text": "There's no code review, and it turns out there was a bug in Brian's code. Oops...",
+            "bad_outcome_modifiers": {
+                "process_quality": -1
+            },
+            "good_outcome_text": "",
+            "good_outcome_modifiers": {}
+        },
+        {
+            "text": "He requests a code review - Lena said she'd be happy to take a look.",
+            "roll_boundaries": [2],
+            "bad_outcome_text": "Lena didn't feel psychologically safe enough to raise an issue with Brian's code. It was a bit hard to understand, and maybe one or two extra tests would have been good... But it's probably fine, right?",
+            "bad_outcome_modifiers": {
+                "team_motivation": -1
+            },
+            "good_outcome_text": "Lena spotted a bug in Brian's code, and let him know about it. She complimented his use of a the factory design pattern, which she'd recently learned about - it was helpful to see it in action.",
+            "good_outcome_modifiers": {
+                "process_quality": 1
+            }
+        }
+    ]
+}

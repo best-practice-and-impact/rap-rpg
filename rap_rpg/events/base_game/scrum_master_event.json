@@ -1,0 +1,36 @@
+{
+    "id": "agile",
+    "text": "The team leader, Gail, knows Agile is generally the best way to handle software development but don't have much experience with it. They manage to create a new post - what role do they hire for?",
+    "choices": [
+        {
+            "text": "A scrum master",
+            "roll_boundaries": [2],
+            "bad_outcome_text": "Derek is enthusiastic, but inexperienced. His enthusiasm and innovative way of thinking helps keep the team motivated and moving forward, but several team members need to take an agile course to learn the basics. Worst of all, there's still loads of admin... The team manage to make some changes to the pipeline, but the work is running behind because they had to fix issues where colleagues had duplicated work and not co-ordinated code changes properly.",
+            "bad_outcome_modifiers": {
+                "late_risk": 1
+            },
+            "good_outcome_text": "Derek is experienced and helps Gail collate an organised, prioritised backlog and set up sprints. Derek ensures stand-ups are short and sweet, and there is always a retro so the team can problem solve issues together, and improve their processes.",
+            "good_outcome_modifiers": {
+                "process_quality": 1,
+                "team_motivation": 1
+            }
+        },
+        {
+            "text": "A delivery manager",
+            "roll_boundaries": [2, 5],
+            "bad_outcome_text": "Ola is keen on waterfall, and insists on creating multiple documents to keep track of things on Excel and Word. She helps clear a lot of reporting and boring tasks out the way so the team can focus on coding, but they struggle to prioritise tasks and understand the bigger picture of what they are doing. It leads to duplicated tasks and some dissatisfaction.",
+            "bad_outcome_modifiers": {
+                "team_motivation": -1
+            },
+            "mid_outcome_text": "Ola is organised, thoughtful, and has some agile knowledge. However, the team struggle to prioritise tasks and discuss them in a way that really gets things moving. Maybe an experienced scrum master would have been better...",
+            "mid_outcome_modifiers": {
+                "late_risk": 1
+            },
+            "good_outcome_text": "Ola is well-versed in agile and lean, gives Gail tips on how to run efficient sprints and stand-ups. Best of all, the team's work is laid out nicely on a Jira board. But, the team spend a fair bit of time sprint planning and stand-ups are quite long and unfocused. The team are interested, but don’t contribute to the overall decision making, so things take a while to get going. Maybe an experienced scrum master would know what to do? Anyhow -",
+            "good_outcome_modifiers": {
+                "process_quality": 1,
+                "team_motivation": 1
+            }
+        }
+    ]
+}

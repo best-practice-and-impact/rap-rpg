@@ -1,0 +1,34 @@
+{
+    "id": "mysterious_stranger",
+    "text": "While walking alone, a mysterious stranger approaches you and offers to share a shortcut through an unfamiliar alley. They seem friendly, but something feels off.",
+    "choices": [
+        {
+            "text": "Follow the stranger into the alley.",
+            "roll_boundaries": [3],
+            "bad_outcome_text": "The alley is a trap. The stranger leads you into danger and you lose your belongings. Strangers cannot always be trusted, no matter how friendly they seem.",
+            "bad_outcome_modifiers": {
+                "team_motivation": -2
+            },
+            "good_outcome_text": "You make it through safely this time, but it was a lucky escape. Following strangers into unknown places is rarely wise.",
+            "good_outcome_modifiers": {
+                "team_motivation": -1
+            }
+        },
+        {
+            "text": "Politely decline and stick to the main road.",
+            "roll_boundaries": [2, 4],
+            "bad_outcome_text": "The main road takes much longer and you arrive late, frustrating the team.",
+            "bad_outcome_modifiers": {
+                "team_motivation": -1
+            },
+            "mid_outcome_text": "You arrive on time. Choosing safety over convenience was the right call — you never know a stranger's true intentions.",
+            "mid_outcome_modifiers": {
+                "team_motivation": 0
+            },
+            "good_outcome_text": "You arrive early and feel confident in your decision. Trusting your instincts and avoiding unknown risks pays off.",
+            "good_outcome_modifiers": {
+                "team_motivation": 1
+            }
+        }
+    ]
+}

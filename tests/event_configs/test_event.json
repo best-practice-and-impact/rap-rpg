@@ -1,0 +1,29 @@
+{
+    "id": "test1",
+    "text": "scenario text",
+    "choices": [
+        {
+            "text": "choice 1.",
+            "roll_boundaries": [2],
+            "bad_outcome_text": "bad outcome text",
+            "bad_outcome_modifiers": {
+                "late_risk": 1
+            },
+            "good_outcome_text": "good outcome text",
+            "good_outcome_modifiers": {
+                "process_quality": 1,
+                "team_motivation": 1
+            }
+        },
+        {
+            "text": "choice 2.",
+            "roll_boundaries": [4],
+            "bad_outcome_text": "bad outcome text",
+            "bad_outcome_modifiers": {
+                "process_quality": -1
+            },
+            "good_outcome_text": "good outcome text",
+            "good_outcome_modifiers": {}
+        }
+    ]
+}

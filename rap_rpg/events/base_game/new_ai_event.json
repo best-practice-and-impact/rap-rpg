@@ -1,0 +1,29 @@
+{
+    "id": "new_ai_agent",
+    "text": "Coming up to the team's deadline, their workplace introduces a new AI agent. Do they use the AI to help implement a new feature in the pipeline?",
+    "choices": [
+        {
+            "text": "Use the AI agent to help implement the new feature.",
+            "roll_boundaries": [2],
+            "bad_outcome_text": "The AI comes up with some code which seems fine, so they merge it into main. It breaks another part of the pipeline. They spend longer debugging than it would have taken to write the new feature!",
+            "bad_outcome_modifiers": {
+                "late_risk": 1
+            },
+            "good_outcome_text": "The AI comes up with some code which gets them on the right track straight away. They interrogate the code and with some tweaks they implement the new feature successfully. The AI even helps them write the documentation and unit tests, saving lots of time!",
+            "good_outcome_modifiers": {
+                "process_quality": 1,
+                "team_motivation": 1
+            }
+        },
+        {
+            "text": "Stick to doing it themselves without using the AI.",
+            "roll_boundaries": [4],
+            "bad_outcome_text": "They spend 2 days on Stack Overflow before coming up with a convoluted way to implement the new feature that they won't be able to understand in a few months' time.",
+            "bad_outcome_modifiers": {
+                "process_quality": -1
+            },
+            "good_outcome_text": "It takes some time but they manage to implement the feature and are confident they know what the code is doing. It's not perfect but they learnt a few things along the way that they can improve with the next iteration.",
+            "good_outcome_modifiers": {}
+        }
+    ]
+}
